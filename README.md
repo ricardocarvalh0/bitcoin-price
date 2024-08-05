@@ -1,7 +1,6 @@
-# Seed Money assessment
+# Requirements
 
-## Requirements
-### Frontend (React): 
+## Frontend (React): 
 - We will develop our backend api to fetch the bitcoin price data 
 - “Backend” section below describes the details of the backend api 
 - We will display the Bitcoin price and calculator in a box 
@@ -15,7 +14,7 @@
 - We can use any library that we are comfortable with 
 - For line chart or state management etc 
 
-### Backend (NodeJS): 
+## Backend (NodeJS): 
 -  We will use https://api.coindesk.com/v1/bpi/currentprice.json API to fetch data 
 -  We will do request to "currentprice.json" API in 30 sec interval and will keep the received data in an SQLite database table (https://www.sqlite.org/index.html) 
 -  We need to create and configure the SQLite database 
@@ -28,7 +27,9 @@
 -  Tosimplify development api endpoints will be directly accessible 
 -  Noauthentication mechanism is needed
 
-## Running
+# Running
+
+## Separated
 
 ### server
 - ```npm install```
@@ -40,3 +41,11 @@
 - ```npm install```
 - ```npm run start```
 - http://localhost:3000
+
+## Only server using react's /build folder
+### server
+- ```npm install```
+- - ```npm run build```
+- ```npm run start```
+- http://localhost:3001/
+
