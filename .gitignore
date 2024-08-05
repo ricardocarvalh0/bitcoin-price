@@ -2,7 +2,7 @@
 
 # dependencies
 client/node_modules
-server/node_modules
+node_modules
 client/.pnp
 client/.pnp.js
 
@@ -22,6 +22,6 @@ server/.DS_Store
 .env.production.local
 
 client/npm-debug.log*
-server/npm-debug.log*
+npm-debug.log*
 client/yarn-debug.log*
 client/yarn-error.log*
