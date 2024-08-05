@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import {Chart} from "react-google-charts";
 
 interface PriceHistory {
@@ -15,16 +15,23 @@ const CHART_OPTIONS = {
 };
 
 function PriceChart() {
-    const [priceHistory, setPriceHistory] = React.useState<PriceHistory[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [priceHistory, setPriceHistory] = useState<PriceHistory[]>([]);
 
-    React.useEffect(() => {
+    useEffect(() => {
+        setLoading(true);
         fetch(PRICE_HISTORY_URI)
             .then((res) => res.json())
-            .then((data) => setPriceHistory(data));
+            .then((data) => setPriceHistory(data))
+            .finally(() => setLoading(false));
     }, []);
 
     if (!priceHistory.length) {
-        return <>"No price history yet"</>;
+        return (
+            <div className="text-base text-center p-4">{
+                loading ? "Loading price history..." : "No price history yet"
+            }</div>
+        );
     }
 
     const chartData = [CHART_AXIS, ...priceHistory.map(({timestamp, price}) => [new Date(timestamp), price])]
