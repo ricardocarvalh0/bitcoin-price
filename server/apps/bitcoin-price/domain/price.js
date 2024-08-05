@@ -4,7 +4,7 @@ const priceDomain = {
     createTables: async () => {
         return new Promise((resolve, reject) => {
             db.serialize(() => {
-                db.run("CREATE TABLE IF NOT EXISTS prices (timestamp TEXT, price REAL)", (err, result) => {
+                db.run("CREATE TABLE IF NOT EXISTS prices (timestamp TEXT, price REAL)", (err, _result) => {
                     if (err) {
                         console.log('error creating tables', err)
                         reject(err);
