@@ -9,6 +9,9 @@ const WS_PATH = '/live-price'
 
 const priceApp = express();
 const priceWS = expressWS(priceApp);
+priceApp.ws(WS_PATH, (_ws, _req) => {
+    broadcastCurrentPrice();
+});
 
 const registerRoutes = () => {
     priceApp.use(express.static(path.resolve(__dirname, '../../../client/build')));
@@ -16,10 +19,6 @@ const registerRoutes = () => {
     priceApp.get('/api/price/history', priceController.getPriceHistory);
     priceApp.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, '../../../client/build', 'index.html'));
-    });
-
-    priceApp.ws(WS_PATH, (_ws, _req) => {
-        broadcastCurrentPrice();
     });
 }
 
@@ -43,8 +42,8 @@ const broadcastCurrentPrice = async () => {
 
 const start = async () => {
     try {
-        registerRoutes();
         await initializeDB();
+        registerRoutes();
 
         setInterval(() => {
             broadcastCurrentPrice();

@@ -11,7 +11,10 @@ const Calculator = ({onClick}: CalculatorProps) => {
     const [status, setStatus] = React.useState<string>('Connecting...');
 
     React.useEffect(() => {
-        const socket = new WebSocket('ws://localhost:3001/live-price');
+        const host = window.location.host;
+        const isLocal = host.includes('localhost');
+        const protocol = isLocal ? 'ws' : 'wss';
+        const socket = new WebSocket(`${protocol}://${host}/live-price`);
         socket.addEventListener('open', () => {
             setStatus('Waiting current price...');
         })
