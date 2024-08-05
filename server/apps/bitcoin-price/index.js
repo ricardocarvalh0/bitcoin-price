@@ -42,8 +42,9 @@ const broadcastCurrentPrice = async () => {
 
 const start = async () => {
     try {
-        registerRoutes();
         await initializeDB();
+
+        registerRoutes();
         setInterval(() => {
             broadcastCurrentPrice();
         }, 30000);
